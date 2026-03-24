@@ -3,253 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAIMIN RATHOD | Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <title>Jaimin Rathod | Web Developer</title>
+    <style>
+        :root {
+            /* PERMANENT LIGHT THEME COLORS */
+            --primary: #00b38f;
+            --bg-grad-1: #f8fafc; 
+            --bg-grad-2: #e2e8f0;
+            --text-light: #0f172a; 
+            --text-muted: #475569;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --heading-grad-1: #0f172a;
+            --heading-grad-2: #4338ca;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --icon-bg: rgba(0, 0, 0, 0.05);
+            --alt-bg: rgba(0, 0, 0, 0.04); 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            padding: 15px 8%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            justify-content: space-between; 
+        }
+
+        .nav img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav img:hover {
+            transform: scale(1.08);
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-items a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-items a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-items a:hover {
+            color: var(--text-light);
+        }
+
+        .nav-items a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101; 
+        }
+
+        .hamburger .line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            flex: 1;
+            padding: 50px 8% 80px; 
+            gap: 50px;
+        }
+
+        .main-content {
+            flex: 1; 
+            max-width: 650px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .main-content h1 {
+            font-size: 60px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, var(--heading-grad-1), var(--heading-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-content h1 span {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+        }
+
+        .main-content p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .cta-btn {
+            background: transparent; 
+            color: var(--primary); 
+            padding: 14px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border: 2px solid var(--primary); 
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        .cta-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-filled {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-filled:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: slideUp 1.2s ease-out; 
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 580px;
+            height: auto;
+            filter: drop-shadow(0 0 25px rgba(0, 179, 143, 0.2)); 
+            border-radius: 20px;
+        }
+
+        /* --- WHY CHOOSE ME SECTION --- */
+        .why-choose-me {
+            padding: 80px 8%;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            background: transparent;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .why-title {
+            font-size: 45px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .why-title::after {
+            content: '';
+            height: 3px;
+            flex: 1; 
+            background: linear-gradient(to right, var(--primary), transparent);
+            border-radius: 5px;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            list-style: none;
+        }
+
+        .features-list li {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .features-list li::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .features-list li:hover {
+            color: var(--text-light);
+            transform: translateX(10px);
+        }
+
+        .features-list li:hover::before {
+            transform: scale(1.5);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* --- UPGRADED WORKED WITH SECTION --- */
+        .worked-with {
+            padding: 40px 8%; 
+            background: #26292f; 
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+            overflow: hidden;
+        }
+
+        .worked-with .section-title {
+            font-size: 45px;
+            font-weight: 900;
+            color: #ffffff; 
+            text-align: left; 
+            margin-bottom: 0; 
+        }
+        
+        .worked-with .section-title span {
+            color: var(--primary);
+        }
+
+        .marquee-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 10px 0; 
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            gap: 120px; 
+            align-items: center;
+            animation: scrollMarquee 20s linear infinite; 
+        }
+
+        .brand-logo {
+            height: 140px; 
+            max-width: 350px; 
+            object-fit: contain;
+            filter: brightness(0) invert(1) opacity(0.85); 
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .brand-logo:hover {
+            filter: brightness(0) invert(1) opacity(1);
+            transform: scale(1.1);
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 60px)); }
+        }
+
+        /* --- ABOUT ME SECTION CSS --- */
+        .about-me {
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            background: transparent;
+        }
+
+        .about-content {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        .about-title {
+            font-size: 45px;
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .about-subtitle {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .about-subtitle .line {
+            height: 1px;
+            background-color: #a0aec0;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .about-text p {
+            font-size: 19px; 
+            color: var(--text-light);
+            line-height: 1.5; 
+            margin-bottom: 16px; 
+            font-weight: 400;
+        }
+
+        .about-text p:first-child {
+            font-size: 21px; 
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .about-image-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            display: block;
+        }
+
+        .signature {
+            font-family: 'Brush Script MT', 'Caveat', cursive; 
+            font-size: 45px;
+            color: var(--text-light);
+            margin-top: 15px;
+            transform: rotate(-3deg);
+        }
+
+        /* ------------------------------------------- */
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .nav { padding: 10px 6%; }
+            .nav img { width: 42px; height: 42px; }
+            .hamburger { display: flex; }
+
+            .nav-items {
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: linear-gradient(180deg, var(--nav-bg) 0%, var(--bg-grad-1) 100%);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 40px 0 50px 0; gap: 30px;
+                transform: translateY(-100%); opacity: 0;
+                pointer-events: none;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: 2px solid var(--primary);
+                border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            }
+
+            .nav-items.active {
+                transform: translateY(0); opacity: 1; pointer-events: all;
+            }
+
+            .nav-items a {
+                font-size: 18px; opacity: 0; transform: translateY(20px); transition: all 0.4s ease;
+            }
+
+            .nav-items.active a { opacity: 1; transform: translateY(0); }
+
+            .hamburger.active .line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .line:nth-child(2) { opacity: 0; }
+            .hamburger.active .line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .hero {
+                flex-direction: column; padding: 60px 8% 60px; text-align: center; justify-content: flex-start; gap: 40px; 
+            }
+            .main-content h1 { font-size: 42px; }
+            .main-content { margin: 0 auto; }
+            .cta-buttons { justify-content: center; gap: 10px; flex-wrap: nowrap; }
+            .cta-btn { padding: 12px 15px; font-size: 14px; white-space: nowrap; width: 100%; }
+            .hero-image img { max-width: 380px; }
+
+            /* Why Choose Me Mobile */
+            .why-choose-me { padding: 60px 8%; }
+            .why-title { font-size: 32px; white-space: normal; flex-direction: column; align-items: flex-start; gap: 10px; }
+            .why-title::after { width: 100%; flex: none; }
+            .features-list { grid-template-columns: 1fr; }
+
+            /* Marquee Mobile Styles */
+            .worked-with { padding: 30px 8%; gap: 15px; }
+            .worked-with .section-title { font-size: 32px; }
+            .marquee-content { gap: 60px; animation: scrollMarquee 20s linear infinite; }
+            .brand-logo { height: 100px; }
+
+            /* About Mobile */
+            .about-me { flex-direction: column; padding: 60px 8%; text-align: left; }
+            .about-title { font-size: 38px; }
+            .about-text p { font-size: 17px; }
+            .about-text p:first-child { font-size: 19px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <a href="#" class="logo">Jaimin<span>.</span></a>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <nav class="nav">
+        <img src="https://lh3.googleusercontent.com/a/ACg8ocIKNf6ue9_PVL4PsymPymaiqwCI8WSzoYNP2GP_rZEdk3Ex-vi3=s360-c-no" alt="Jaimin Rathod Logo">
+        
+        <div class="nav-controls">
             <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
             </div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Hi, I'm <span>Jaimin.</span></h1>
-                <p>A passionate web developer dedicated to creating beautiful, functional, and user-friendly websites. I love turning ideas into reality through code.</p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn">View My Work</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
-                </div>
+        <div class="nav-items">
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+            <a href="#">Creations</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="main-content">
+            <h1>Build your<br>online presence <br><span>via website</span></h1>
+            <p>I Help Business Build Stronger Online Presence with their Business Websites.</p>
+            
+            <div class="cta-buttons">
+                <button class="cta-btn btn-filled">Whatsapp Now</button>
+                <button class="cta-btn">View Projects</button>
             </div>
         </div>
+
         <div class="hero-image">
-            <img src="img/img3.png" alt="Developer working on laptop with code editor visible">
+            <img src="image.png" alt="Jaimin Rathod">
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="img/img2.png" alt="Professional headshot of Jaimin Rathod">
-                </div>
-                <div class="about-text">
-                    <h3>Web Developer & Designer</h3>
-                    <p>Hello! I'm Jaimin Rathod, a passionate web developer with a focus on creating engaging and user-friendly digital experiences. I enjoy turning complex problems into simple, beautiful and intuitive designs.</p>
-                    <p>My goal is to build web applications that are both visually appealing and highly functional, ensuring a seamless user experience across all devices.</p>
-                    <ul class="info-list">
-                        <li><strong>Name:</strong> Jaimin Rathod</li>
-                        <li><strong>Email:</strong> jaiminrathod9865@gmail.com</li>
-                        <li><strong>Age:</strong> 20</li>
-                        <li><strong>From:</strong> Mahisagar, Gujarat, India</li>
-                    </ul>
-                    <a href="#" class="btn">Download CV</a>
-                </div>
-            </div>
-        </div>
+    <section class="why-choose-me">
+        <h2 class="why-title">Why choose me?</h2>
+        <ul class="features-list">
+            <li>Proven Coding Expertise</li>
+            <li>MERN Stack Proficiency</li>
+            <li>Client-Centric Approach</li>
+            <li>Cutting-Edge Techniques</li>
+            <li>SEO Optimization</li>
+            <li>Satisfaction Guaranteed</li>
+        </ul>
     </section>
 
-    <!-- Skills Section -->
-    <section class="section" id="skills">
-        <div class="container">
-            <div class="section-title">
-                <h2>My Skills</h2>
-            </div>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
-                    <h3>HTML/CSS</h3>
-                    <p>Creating responsive and semantic web pages with modern CSS techniques and frameworks.</p>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-js"></i></div>
-                    <h3>JavaScript</h3>
-                    <p>Building interactive web applications with vanilla JS and modern frameworks.</p>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-react"></i></div>
-                    <h3>React JS</h3>
-                    <p>Developing dynamic user interfaces with React and related ecosystem tools.</p>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fa-solid fa-desktop"></i></div>
-                    <h3>Frontend Development</h3>
-                    <p>Frontend web development focuses on building the visual and interactive parts of websites.</p>
-                </div>
+    <section class="worked-with">
+        <h2 class="section-title">Worked <span>With</span></h2>
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/nwvhx7itkam5cativxgd.svg" alt="Company 1">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/wuhibcgwux216ff9atbo.svg" alt="Company 2">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/fwwntj767sdbcxqbbnl5.svg" alt="Company 3">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/fx2zmyplxalagwgniy7z.svg" alt="Company 4">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/mshcmtwykxscrg6dqb2y.svg" alt="Company 5">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719230305/jayrai-june/zrtca66cri2ow1apmojz.svg" alt="Company 6">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/zo4vnnx9biwjbbhqo31j.svg" alt="Company 7">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197433/jayrai-june/dapwnh3cgz8rul9qnbk3.svg" alt="Company 8">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/pzs6zgpewyy0jonnwh9k.svg" alt="Company 9">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/icfjlb8uayvwj0pl7n9o.svg" alt="Company 10">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/dhxhgo5ynudhrkc9iizk.svg" alt="Company 11">
+                
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/nwvhx7itkam5cativxgd.svg" alt="Company 1">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/wuhibcgwux216ff9atbo.svg" alt="Company 2">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/fwwntj767sdbcxqbbnl5.svg" alt="Company 3">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/fx2zmyplxalagwgniy7z.svg" alt="Company 4">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/mshcmtwykxscrg6dqb2y.svg" alt="Company 5">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719230305/jayrai-june/zrtca66cri2ow1apmojz.svg" alt="Company 6">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197430/jayrai-june/zo4vnnx9biwjbbhqo31j.svg" alt="Company 7">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197433/jayrai-june/dapwnh3cgz8rul9qnbk3.svg" alt="Company 8">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/pzs6zgpewyy0jonnwh9k.svg" alt="Company 9">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/icfjlb8uayvwj0pl7n9o.svg" alt="Company 10">
+                <img class="brand-logo" src="https://res.cloudinary.com/remind-cents-cloud/image/upload/v1719197432/jayrai-june/dhxhgo5ynudhrkc9iizk.svg" alt="Company 11">
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>My Projects</h2>
+    <section class="about-me" id="about">
+        <div class="about-content">
+            <h2 class="about-title">Let's Talk About Me</h2>
+            <div class="about-subtitle">
+                <span>A Small Intro</span>
+                <div class="line"></div>
             </div>
-            <div class="projects-container">
-                <div class="project-item">
-                    <div class="project-img">
-                        <img src="img/p1.png" alt="E-commerce website interface with product listings">
-                    </div>
-                    <div class="project-info">
-                        <h3>Tic‑Tac‑Toe</h3>
-                        <p>A classic Tic-Tac-Toe game with a clean, responsive interface built using HTML, CSS, and JavaScript.</p>
-                        <div class="project-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                        </div>
-                        <a href="https://iamjaiminrathod.github.io/Tic-Tac-Toe/" class="btn">View Project</a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div class="project-img">
-                        <img src="img/p2.png" alt="Weather application dashboard with forecast information">
-                    </div>
-                    <div class="project-info">
-                        <h3>Weather App</h3>
-                        <p>A weather application that provides current conditions and forecasts using a weather API.</p>
-                        <div class="project-tags">
-                            <span>JavaScript</span>
-                            <span>API</span>
-                            <span>CSS</span>
-                            <span>HTML</span>
-                        </div>
-                        <a href="https://iamjaiminrathod.github.io/weather-app/" class="btn">View Project</a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div class="project-img">
-                        <img src="img/p3.png" alt="Task management application with drag and drop interface">
-                    </div>
-                    <div class="project-info">
-                        <h3>Task Manager</h3>
-                        <p>A task management application with drag-and-drop functionality and local storage.</p>
-                        <div class="project-tags">
-                            <span>HTML / CSS</span>
-                            <span>JavaScript</span>
-                            <span>LocalStorage</span>
-                        </div>
-                        <a href="https://iamjaiminrathod.github.io/Task-Manager/" class="btn">View Project</a>
-                    </div>
-                </div>
+            
+            <div class="about-text">
+                <p>From Exploring Arts to Building Top-Notch Websites:</p>
+                <p>After completing my 11th and 12th in Arts, my deep curiosity for the digital world led me to pursue BCA.</p>
+                <p>Now in my 2nd year, I have mastered full-stack development through continuous learning and hands-on practice.</p>
+                <p>Over the last two years, I honed my skills and proudly achieved 2nd rank in the PW Full Stack Web Development course.</p>
+                <p>I started freelancing last year and have already delivered 10+ SEO-optimized, high-quality business websites.</p>
+                <p>Contact me today to build your online presence and scale your business to new heights.</p>
             </div>
+            
+            <button class="cta-btn btn-filled" style="margin-top: 15px;">Whatsapp Now</button>
+        </div>
+
+        <div class="about-image-container">
+            <div class="about-image-wrapper">
+                <img src="image.png" alt="Jaimin Rathod">
+            </div>
+            <div class="signature">Jaimin</div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Me</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="contact-details">
-                            <h4>Location</h4>
-                            <p>Mahisagar, Gujarat, India</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p>jaiminrathod9865@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div class="contact-details">
-                            <h4>Phone</h4>
-                            <p>+91 6355938009</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navItems = document.querySelector('.nav-items');
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-col">
-                <h4>Jaimin Rathod</h4>
-                <p>A passionate web developer dedicated to creating beautiful, functional, and user-friendly websites.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/iamjaiminrathod"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/iamjaiminrathod/"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/iamjaiminrathod/All-Projects"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#">Web Development</a></li>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">Frontend Development</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 Jaimin Rathod. All Rights Reserved.</p>
-        </div>
-    </footer>
+        // Mobile menu toggle logic
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navItems.classList.toggle('active');
+        });
 
-    <script src="script.js"></script>
+        document.querySelectorAll('.nav-items a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navItems.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
