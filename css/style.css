@@ -1,4 +1,4 @@
-        :root {
+:root {
             --primary: #03a181; 
             --bg-grad-1: #f8fafc; 
             --bg-grad-2: #e2e8f0;
@@ -13,12 +13,27 @@
             margin: 0;
             padding: 0;
         }
+
+        /* ZOOM & OVERFLOW FIX (Added) */
         html, body {
             width: 100%;
-            overflow-x: hidden; /* Ye horizontal scroll aur extra space ko khatam kar dega */
+            overflow-x: hidden; 
             margin: 0;
             padding: 0;
-    }
+            position: relative;
+        }
+
+        /* SCROLL REVEAL STYLE (Added for the effect you asked) */
+        .reveal {
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
         body {
             background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
@@ -257,7 +272,6 @@
             box-shadow: 0 0 15px var(--primary);
         }
 
-        /* --- WORKED WITH & CERTIFIED FROM SECTIONS --- */
         .worked-with, .certified-from {
             padding: 40px 8%; 
             background: #26292f; 
@@ -947,8 +961,16 @@
             .slider-container { padding: 0 6%; }
             .project-card { flex: 0 0 100%; padding: 15px; }
             .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-            .whatsapp-float svg { padding: 3px;
+            .whatsapp-float svg { padding: 3px; }
+
+            /* FOOTER MOBILE FIX (Modified for left-align as requested) */
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: left; }
+            .social-icons, .contact-info-list div { justify-content: flex-start; }
+            .footer-nl-form { flex-direction: column; }
+            .footer-nl-form input { border-right: 1px solid #ccc; margin-bottom: 10px; }
         }
 
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
         }
